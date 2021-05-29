@@ -1,0 +1,77 @@
+import java.util.Scanner;
+
+public class TamilNaduElectricityBill {
+	public static void main(String[] arg) {
+		TamilNaduElectricityBill bill = new TamilNaduElectricityBill();
+		bill.generateBill();
+	}
+
+	private void generateBill() {
+		// first reading kw h
+		System.out.println("Enter the previous month bill reading1 no ");
+		Scanner sc = new Scanner(System.in);
+		int reading1 = sc.nextInt();
+
+		// second reading kw h
+		System.out.println("Enter the present reading2 no ");
+		int reading2 = sc.nextInt();
+		// variables
+		int total_current_charges1 = 0;
+		int total_current_charges2 = 0;
+		int consumed_units         = 0;
+
+		// Consumed Units
+		consumed_units = reading2 - reading1;
+		System.out.println(consumed_units);
+		if (consumed_units < 105) {
+			System.out.println("your unit less than 105 so you dont pay the money ");
+		}
+
+		// 1 to 200 unit convert amount
+		int total = 0;
+			for (int i = 1; i < 201; i++) {
+				if (consumed_units > 0) {
+				total_current_charges1 = (int) (i * 2.5);
+				consumed_units--;
+			}
+		}
+			System.out.println("1 unit <= 200 unit, $2.50/unit = " + total_current_charges1);
+
+		// 200 to 500 unit convert amount
+		for (int i = 1; i < 500; i++) {
+			if (consumed_units > 0) {
+				total_current_charges2 = (int) (i * 3.0);
+				consumed_units--;
+			}
+		}
+		System.out.println("201 unit <= 500 unit,$3/unit = " + total_current_charges2);
+		
+		// 500 to  unit convert amount
+				for (int i = 500; i < 1000; i++) {
+					if (consumed_units > 0) {
+						total_current_charges2 = (int) (i * 6.60);
+						consumed_units--;
+					}
+				}
+				//System.out.println("201 unit <= 500 unit,$3/unit = " + total_current_charges2);
+				
+		//total 
+		total = total_current_charges1 + total_current_charges2;
+		
+
+		// 1
+		if (total <= 205) {
+			total = total - 100;
+			total = total - 10;
+			total = total - 250;
+			total = total + 30;
+		} else if (total > 205) {
+			total = total - 50;
+			total = total - 250;
+			total = total + 30;
+		}
+		System.out.println("your output " + total);
+
+	}
+
+}
